@@ -212,4 +212,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // NOTA: La lógica de filtros de portafolio (Punto 4) queda deshabilitada
     // por ahora, ya que estamos usando el carrusel.
 
+    /*
+    ============================================================
+    6. FUNCIONALIDAD DEL CARRUSEL DE TESTIMONIOS
+    ============================================================
+    */
+    const testimonialTrack = document.getElementById('testimonial-track');
+    const testimonialPrevBtn = document.getElementById('testimonial-prev-btn');
+    const testimonialNextBtn = document.getElementById('testimonial-next-btn');
+
+    if (testimonialTrack && testimonialPrevBtn && testimonialNextBtn) {
+        const slides = testimonialTrack.querySelectorAll('.grid'); // Cada slide es un div.grid
+        const slideCount = slides.length;
+        let currentIndex = 0;
+        let slideWidth = 0;
+
+        // 6.1. Inicialización y ajuste de tamaño
+        function initializeTestimonialCarousel() {
+            // Calcula el ancho basado en el contenedor padre (el div 'relative')
+            const container = testimonialTrack.parentElement;
+            slideWidth = container.clientWidth;
+            
+            // Asigna el ancho calculado a cada slide
+            slides.forEach(slide => {
+                slide.style.minWidth = `${slideWidth}px`;
+            });
+            
+            // Muestra el primer slide
+            updateTestimonialCarousel();
+        }
+
+        // Ejecutar al cargar la página y al redimensionar
+        initializeTestimonialCarousel();
+        window.addEventListener('resize', initializeTestimonialCarousel);
+
+        // 6.2. Función principal de movimiento
+        function updateTestimonialCarousel() {
+            // Calcula la posición de desplazamiento
+            const offset = -currentIndex * slideWidth;
+            testimonialTrack.style.transform = `translateX(${offset}px)`;
+            
+            // Deshabilita/Habilita los botones si llegamos a los límites
+            testimonialPrevBtn.disabled = (currentIndex === 0);
+            testimonialNextBtn.disabled = (currentIndex === slideCount - 1);
+        }
+
+        // 6.3. Navegación
+        testimonialNextBtn.addEventListener('click', () => {
+            if (currentIndex < slideCount - 1) {
+                currentIndex++;
+                updateTestimonialCarousel();
+            }
+        });
+
+        testimonialPrevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateTestimonialCarousel();
+            }
+        });
+    } // Fin del if(testimonialTrack...)
+
 }); // Fin del DOMContentLoaded
