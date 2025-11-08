@@ -34,20 +34,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        /* Define el estado inicial de las secciones a animar */
         .fade-in-section {
             opacity: 0;
-            transform: translateY(30px); /* Empieza 30px más abajo */
+            transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
-        /* Define el estado final (visible) que agregará JavaScript */
         .fade-in-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* [Valor Agregado] Transiciones suaves en todos los botones y enlaces */
         a, button {
             transition: all 0.3s ease-in-out;
         }
@@ -59,22 +54,32 @@
 
 <body class="font-sans bg-primary-light text-primary-dark">
 
-    <header class="bg-white shadow-sm py-4 px-6 md:px-8 lg:px-12 flex justify-between items-center max-w-7xl mx-auto sticky top-0 z-50">
-        <div class="flex items-center space-x-2">
-            <img src="./images/Logov2.png" alt="DECOR.IN Logo" class="h-20">
-            <span class="text-xl font-bold text-primary-dark">DECOR.IN</span>
+    <header class="bg-white shadow-sm py-4 w-full sticky top-0 z-50">
+    
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+            
+            <div class="flex items-center space-x-2">
+                <a href="#inicio" class="flex items-center space-x-2">
+                    <img src="./images/logo.png" alt="DECOR.IN Logo" class="h-14"> 
+                    <span class="text-xl font-bold text-primary-dark">DECOR.IN</span>
+                </a>
+            </div>
+            
+            <nav id="nav-menu" class="hidden absolute md:static top-[72px] left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none md:flex items-center space-y-4 md:space-y-0 p-4 md:p-0 md:space-x-8 text-sm font-medium">
+                <a href="#inicio" class="block md:inline text-primary-dark hover:text-gray-dark">Inicio</a>
+                <a href="#servicios" class="block md:inline text-primary-dark hover:text-gray-dark">Servicios</a>
+                <a href="#portafolio" class="block md:inline text-primary-dark hover:text-gray-dark">Portafolio</a>
+                <a href="#contacto" class="block md:inline text-primary-dark hover:text-gray-dark">Contacto</a>
+            
+                <a href="#contacto" class="block md:hidden lg:block bg-accent-olive text-white px-5 py-2 rounded-md font-semibold hover:bg-dark-hover ml-4">
+                    Cotizar Proyecto
+                </a>
+            </nav>
+            
+            <button id="mobile-menu-button" class="md:hidden text-primary-dark text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        
-        <nav id="nav-menu" class="hidden absolute md:static top-[72px] left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none md:flex space-y-4 md:space-y-0 p-4 md:p-0 md:space-x-8 text-sm font-medium">
-            <a href="#inicio" class="block md:inline text-primary-dark hover:text-gray-dark">Inicio</a>
-            <a href="#servicios" class="block md:inline text-primary-dark hover:text-gray-dark">Servicios</a>
-            <a href="#portafolio" class="block md:inline text-primary-dark hover:text-gray-dark">Portafolio</a>
-            <a href="#contacto" class="block md:inline text-primary-dark hover:text-gray-dark">Contacto</a>
-        </nav>
-        
-        <button id="mobile-menu-button" class="md:hidden text-primary-dark text-2xl">
-            <i class="fas fa-bars"></i>
-        </button>
     </header>
 
     <section id="inicio" class="py-20 md:py-32 text-center bg-primary-light">
@@ -102,9 +107,7 @@
             <p class="text-lg text-center text-gray-dark mb-16 max-w-3xl mx-auto">
                 Ofrecemos soluciones integrales de diseño de interiores adaptadas a tus necesidades.
             </p>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
                 <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
                     <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
                         <i class="fas fa-home text-xl"></i>
@@ -176,69 +179,6 @@
                         </p>
                     </div>
                 </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
-                    <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
-                        <i class="fas fa-lightbulb text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Iluminación y ambientación</h3>
-                        <p class="text-gray-dark text-sm">
-                            Diseño de esquemas de iluminación y elección de luminarias para crear ambientes perfectos.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
-                    <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
-                        <i class="fas fa-brush text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Decoración y estilismo</h3>
-                        <p class="text-gray-dark text-sm">
-                            Selección de accesorios, arte y elementos decorativos para embellecer tu espacio.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
-                    <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
-                        <i class="fas fa-hammer text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Gestión y ejecución de obra</h3>
-                        <p class="text-gray-dark text-sm">
-                            Supervisión de equipos, coordinación con proveedores y gestión integral del proyecto.
-                        </p>
-                    </div>
-                </div>
-                 
-                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
-                    <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
-                        <i class="fas fa-paint-roller text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Remodelaciones y reformas</h3>
-                        <p class="text-gray-dark text-sm">
-                            Transformamos y actualizamos tus espacios existentes, adaptándolos a nuevas necesidades.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md flex items-start space-x-4">
-                    <div class="flex-shrink-0 bg-primary-dark rounded-full p-3 text-white">
-                        <i class="fas fa-comments text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Consultoría y asesoría personalizada</h3>
-                        <p class="text-gray-dark text-sm">
-                            Te guiamos en cada etapa de tu proyecto con expertos en diseño e interiorismo.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="hidden lg:block"></div> 
-
             </div>
         </div>
     </section>
@@ -250,80 +190,105 @@
                 Proyectos que transforman espacios en experiencias memorables.
             </p>
 
-            <div class="flex justify-center space-x-4 mb-12">
-                <button class="bg-primary-dark text-white px-6 py-2 rounded-md font-semibold hover:bg-dark-hover">
-                    Todo
+            <div class="relative max-w-7xl mx-auto">
+    
+                <div class="overflow-hidden relative">
+                    
+                    <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out" style="width: fit-content;">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-1 w-full" style="min-width: 100%;"> 
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="comercial">
+                                <img src="https://source.unsplash.com/600x400/?modern-office,interior" alt="Oficinas" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Oficinas Modernas</h3><p class="text-gray-dark text-sm">Empresa de tecnología.</p></div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="residencial">
+                                <img src="https://source.unsplash.com/600x400/?minimalist-kitchen,interior" alt="Cocina Minimalista" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Cocina Minimalista</h3><p class="text-gray-dark text-sm">Apartamento de lujo.</p></div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="residencial">
+                                <img src="https://source.unsplash.com/600x400/?modern-living-room,interior" alt="Sala de Estar" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Sala de Estar</h3><p class="text-gray-dark text-sm">Estilo contemporáneo.</p></div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-1 w-full" style="min-width: 100%;">
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="comercial">
+                                <img src="https://source.unsplash.com/600x400/?cafe-interior,restaurant" alt="Cafetería" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Cafetería Chic</h3><p class="text-gray-dark text-sm">Proyecto comercial.</p></div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="residencial">
+                                <img src="https://source.unsplash.com/600x400/?bathroom-design,luxury" alt="Baño de Lujo" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Baño Principal</h3><p class="text-gray-dark text-sm">Materiales premium.</p></div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden transition" data-category="residencial">
+                                <img src="https://source.unsplash.com/600x400/?cozy-bedroom,apartment" alt="Dormitorio Principal" class="w-full h-60 object-cover">
+                                <div class="p-4"><h3 class="text-lg font-semibold text-primary-dark">Dormitorio Principal</h3><p class="text-gray-dark text-sm">Ambiente acogedor.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="prev-btn" class="absolute top-1/2 left-0 -translate-y-1/2 bg-primary-dark text-white p-3 rounded-full shadow-lg opacity-50 hover:opacity-100 z-10">
+                    <i class="fas fa-chevron-left"></i>
                 </button>
-                <button class="border border-gray-medium text-primary-dark px-6 py-2 rounded-md font-semibold hover:bg-gray-light">
-                    Residencial
-                </button>
-                <button class="border border-gray-medium text-primary-dark px-6 py-2 rounded-md font-semibold hover:bg-gray-light">
-                    Comercial
+                <button id="next-btn" class="absolute top-1/2 right-0 -translate-y-1/2 bg-primary-dark text-white p-3 rounded-full shadow-lg opacity-50 hover:opacity-100 z-10">
+                    <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/600x400?text=Oficinas" alt="Diseño de Oficinas" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Diseño de Oficinas</h3>
-                        <p class="text-gray-dark text-sm mb-4">
-                            Empresa de tecnología startup de software. Modernidad y funcionalidad.
-                        </p>
-                        <a href="#" class="text-primary-dark hover:underline text-sm font-medium flex items-center">
-                            Ver Proyecto <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+        </div>
+    </section>
+    
+    <section id="testimonios" class="py-20 md:py-24 bg-gray-light fade-in-section">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-primary-dark mb-4">Lo que dicen nuestros clientes</h2>
+            <p class="text-lg text-gray-dark mb-16 max-w-2xl mx-auto">
+                La confianza y satisfacción de nuestros clientes es nuestra mejor carta de presentación.
+            </p>
+    
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-sm text-left">
+                    <div class="text-yellow-500 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-dark italic mb-6">"El equipo de DECOR.IN transformó mi departamento. Captaron mi visión perfectamente y el resultado superó mis expectativas. ¡Totalmente recomendados!"</p>
+                    <div class="flex items-center">
+                        <div>
+                            <h4 class="font-semibold text-primary-dark">Maria González</h4>
+                            <p class="text-sm text-gray-dark">Proyecto Residencial, Miraflores</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/600x400?text=Cocina" alt="Diseño de Cocina para Apartamento" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Diseño de Cocina para Apartamento</h3>
-                        <p class="text-gray-dark text-sm mb-4">
-                            Cocina abierta de estilo minimalista con isla central.
-                        </p>
-                        <a href="#" class="text-primary-dark hover:underline text-sm font-medium flex items-center">
-                            Ver Proyecto <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+    
+                <div class="bg-white p-8 rounded-lg shadow-sm text-left">
+                    <div class="text-yellow-500 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-dark italic mb-6">"Profesionalismo y creatividad. Rediseñaron nuestra oficina optimizando cada espacio. Nuestros colaboradores están más cómodos y productivos."</p>
+                    <div class="flex items-center">
+                        <div>
+                            <h4 class="font-semibold text-primary-dark">Carlos Mendoza</h4>
+                            <p class="text-sm text-gray-dark">Gerente de Operaciones, Oficinas San Isidro</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/600x400?text=Sala+Star" alt="Diseño de Sala Star para Apartamento" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Diseño de Sala Star para Apartamento</h3>
-                        <p class="text-gray-dark text-sm mb-4">
-                            Espacio acogedor y funcional para el entretenimiento.
-                        </p>
-                        <a href="#" class="text-primary-dark hover:underline text-sm font-medium flex items-center">
-                            Ver Proyecto <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/600x400?text=Dormitorios" alt="Diseño de Dormitorios Interiores" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-2">Diseño de Dormitorios Interiores</h3>
-                        <p class="text-gray-dark text-sm mb-4">
-                            Ambientes relajantes y estéticos para el descanso.
-                        </p>
-                        <a href="#" class="text-primary-dark hover:underline text-sm font-medium flex items-center">
-                            Ver Proyecto <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contacto" class="py-20 md:py-24 bg-gray-light fade-in-section">
+    <section id="contacto" class="py-20 md:py-24 bg-primary-light fade-in-section">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-primary-dark mb-4">Contacto</h2>
+            
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-primary-dark mb-4">Inicia Tu Proyecto Hoy</h2>
             <p class="text-lg text-center text-gray-dark mb-16 max-w-3xl mx-auto">
-                ¿Tienes un proyecto en mente? Conversemos sobre cómo podemos ayudarte.
+                Completa este formulario y obtén una **cotización gratuita** para tu proyecto. ¡Hagamos realidad tu visión!
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-10 rounded-lg shadow-md">
@@ -332,21 +297,21 @@
                     <h3 class="text-2xl font-semibold text-primary-dark mb-6">Información de Contacto</h3>
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4 text-gray-dark">
-                            <i class="fas fa-envelope text-2xl text-primary-dark"></i>
+                            <i class="fas fa-envelope text-2xl text-accent-olive"></i>
                             <div>
                                 <p class="font-medium">Email</p>
                                 <a href="mailto:contacto@decorin.com" class="hover:underline">contacto@decorin.com</a>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 text-gray-dark">
-                            <i class="fas fa-phone-alt text-2xl text-primary-dark"></i>
+                            <i class="fas fa-phone-alt text-2xl text-accent-olive"></i>
                             <div>
                                 <p class="font-medium">Teléfono</p>
                                 <a href="tel:+51999888777" class="hover:underline">+51 999 888 777</a>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 text-gray-dark">
-                            <i class="fas fa-map-marker-alt text-2xl text-primary-dark"></i>
+                            <i class="fas fa-map-marker-alt text-2xl text-accent-olive"></i>
                             <div>
                                 <p class="font-medium">Dirección</p>
                                 <p>Lima, Perú</p>
@@ -368,19 +333,19 @@
                     <form action="#" method="POST" class="space-y-6">
                         <div>
                             <label for="nombre" class="block text-sm font-medium text-gray-dark mb-2">Nombre *</label>
-                            <input type="text" id="nombre" name="nombre" class="w-full p-3 border border-gray-light rounded-md focus:ring-primary-dark focus:border-primary-dark" required>
+                            <input type="text" id="nombre" name="nombre" class="w-full p-3 border border-gray-light rounded-md focus:ring-accent-olive focus:border-accent-olive" required>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-dark mb-2">Email *</label>
-                            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-light rounded-md focus:ring-primary-dark focus:border-primary-dark" required>
+                            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-light rounded-md focus:ring-accent-olive focus:border-accent-olive" required>
                         </div>
                         <div>
                             <label for="telefono" class="block text-sm font-medium text-gray-dark mb-2">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" class="w-full p-3 border border-gray-light rounded-md focus:ring-primary-dark focus:border-primary-dark">
+                            <input type="tel" id="telefono" name="telefono" class="w-full p-3 border border-gray-light rounded-md focus:ring-accent-olive focus:border-accent-olive">
                         </div>
                         <div>
                             <label for="mensaje" class="block text-sm font-medium text-gray-dark mb-2">Mensaje *</label>
-                            <textarea id="mensaje" name="mensaje" rows="5" class="w-full p-3 border border-gray-light rounded-md focus:ring-primary-dark focus:border-primary-dark" required></textarea>
+                            <textarea id="mensaje" name="mensaje" rows="5" class="w-full p-3 border border-gray-light rounded-md focus:ring-accent-olive focus:border-accent-olive" required></textarea>
                         </div>
                         <button type="submit" class="w-full bg-primary-dark text-white px-6 py-3 rounded-md font-semibold hover:bg-dark-hover shadow-md">
                             Enviar Mensaje
@@ -396,6 +361,12 @@
             <p>&copy; 2025 DECOR.IN. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <a href="https://api.whatsapp.com/send?phone=51941963144&text=Hola%20DECOR.IN,%20me%20gustaría%20cotizar%20un%20proyecto."
+       target="_blank"
+       class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-40 hover:bg-green-600">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
 
 </body>
 </html>
