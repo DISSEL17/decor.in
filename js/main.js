@@ -273,4 +273,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } // Fin del if(testimonialTrack...)
 
+    /*
+    ============================================================
+    7. FUNCIONALIDAD DEL FORMULARIO DE CONTACTO (SERVERLESS)
+    ============================================================
+    */
+    const contactForm = document.querySelector('#contacto form');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            // Prevenir el envío tradicional del formulario
+            e.preventDefault();
+
+            // 1. Mostrar estado de "Enviando..."
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
+            submitButton.disabled = true;
+
+            // 2. Recolectar los datos
+            const formData = new FormData(contactForm);
+            const data = {
+                nombre: formData.get('nombre'),
+                email: formData.get('email'),
+                telefono: formData.get('telefono'),
+                mensaje: formData.get('mensaje'),
+            };
+
+            try {
+                // 3. Enviar datos a nuestra Función Serverless
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // 4. Éxito
+                    contactForm.reset(); // Limpiar el formulario
+                    submitButton.innerHTML = '¡Mensaje Enviado!';
+                    submitButton.classList.remove('bg-primary-dark', 'hover:bg-dark-hover');
+                    submitButton.classList.add('bg-green-500'); // Color verde de éxito
+                } else {
+                    // 5. Error del servidor
+                    throw new Error('Hubo un problema con el envío.');
+                }
+
+            } catch (error) {
+                // 6. Error de red o del fetch
+                submitButton.innerHTML = 'Error al Enviar';
+                submitButton.classList.remove('bg-primary-dark', 'hover:bg-dark-hover');
+                submitButton.classList.add('bg-red-500'); // Color rojo de error
+                console.error(error);
+            } finally {
+                // 7. Después de 3 segundos, restaurar el botón
+                setTimeout(() => {
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('bg-green-500', 'bg-red-500');
+                    submitButton.classList.add('bg-primary-dark', 'hover:bg-dark-hover');
+                }, 3000);
+            }
+        });
+    }
+
 }); // Fin del DOMContentLoaded

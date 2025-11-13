@@ -1,0 +1,8 @@
+{
+  "name": "decor-in-web-form",
+  "version": "1.0.0",
+  "description": "Función Serverless para formulario de contacto",
+  "dependencies": {
+    "resend": "^3.0.0"
+  }
+}
