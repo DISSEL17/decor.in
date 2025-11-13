@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (menuButton && navMenu) {
         menuButton.addEventListener('click', () => {
-            // Alterna la clase 'hidden' en el menú.
-            // La clase 'hidden' de Tailwind es (display: none)
             navMenu.classList.toggle('hidden');
         });
     }
@@ -22,21 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     2. FUNCIONALIDAD DE SCROLL SUAVE (SMOOTH SCROLL)
     ============================================================
     */
-    // Selecciona todos los enlaces que empiezan con '#'
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            // Previene el salto brusco por defecto
             e.preventDefault();
-
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
                 targetElement.scrollIntoView({
-                    behavior: 'smooth' // ¡La magia del scroll suave!
+                    behavior: 'smooth'
                 });
-
-                // (Opcional) Cierra el menú móvil si se hace clic en un enlace
                 if (window.innerWidth < 768 && !navMenu.classList.contains('hidden')) {
                     navMenu.classList.add('hidden');
                 }
@@ -49,172 +42,73 @@ document.addEventListener('DOMContentLoaded', () => {
     3. ANIMACIÓN DE SCROLL (Intersection Observer)
     ============================================================
     */
-    // Esta es la API moderna de JavaScript para detectar
-    // cuándo un elemento entra en la pantalla.
-    
-    // Selecciona todas las secciones que marcamos
     const sections = document.querySelectorAll('.fade-in-section');
-
     const observerOptions = {
-        root: null, // Observa en relación al viewport
-        threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        root: null,
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            // Si el elemento está en pantalla (isIntersecting)
             if (entry.isIntersecting) {
-                // Añade la clase 'is-visible' que definimos en el CSS
                 entry.target.classList.add('is-visible');
-                // Deja de observar este elemento (la animación solo ocurre una vez)
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Asigna el observador a cada una de tus secciones
     sections.forEach(section => {
         observer.observe(section);
     });
 
     /*
     ============================================================
-    4. FUNCIONALIDAD DE FILTRO DE PORTAFOLIO
+    4. [NUEVO] FUNCIONALIDAD DE FILTROS DEL PORTAFOLIO (Opción B)
     ============================================================
     */
-    const container = document.getElementById('portfolio-container');
-    const filterButtons = document.querySelectorAll('.flex.justify-center.space-x-4 button');
-    const projects = document.querySelectorAll('#portfolio-container > div'); // Selecciona todas las tarjetas
+    const filterButtonsContainer = document.getElementById('portfolio-filters');
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    // Seleccionamos las tarjetas desde el nuevo grid
+    const portfolioCards = portfolioGrid ? portfolioGrid.querySelectorAll('.portfolio-card') : [];
 
-    // Función principal para mostrar u ocultar proyectos
-    function filterProjects(category) {
-        projects.forEach(project => {
-            const projectCategory = project.getAttribute('data-category');
-            
-            // Si la categoría es 'all' o coincide con la categoría del proyecto, muestra la tarjeta
-            if (category === 'all' || projectCategory === category) {
-                // Muestra la tarjeta con una animación suave
-                project.classList.remove('hidden', 'opacity-0');
-                project.classList.add('opacity-100'); 
-            } else {
-                // Oculta la tarjeta
-                project.classList.remove('opacity-100');
-                project.classList.add('hidden', 'opacity-0');
+    if (filterButtonsContainer && portfolioGrid && portfolioCards.length > 0) {
+        
+        filterButtonsContainer.addEventListener('click', (e) => {
+            const filterBtn = e.target.closest('.filter-btn');
+            if (!filterBtn || filterBtn.classList.contains('active-filter')) {
+                return; // Si no es un botón o ya está activo, no hacer nada
             }
-        });
-    }
 
-    // Función para manejar el estado activo de los botones
-    function setActiveButton(activeButton) {
-        filterButtons.forEach(button => {
-            // Remueve las clases activas de todos
-            button.classList.remove('bg-primary-dark', 'text-white', 'hover:bg-dark-hover', 'border-gray-medium');
-            
-            // Añade las clases pasivas (default) a los botones
-            button.classList.add('border', 'border-gray-medium', 'text-primary-dark', 'hover:bg-gray-light');
-        });
-
-        // Añade las clases activas al botón clickeado
-        activeButton.classList.remove('border', 'border-gray-medium', 'text-primary-dark', 'hover:bg-gray-light');
-        activeButton.classList.add('bg-primary-dark', 'text-white', 'hover:bg-dark-hover');
-    }
-
-    // Escuchar los clicks en los botones de filtro
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            let category;
-            
-            // Determinar la categoría basándose en el ID del botón
-            if (button.id === 'filter-res') {
-                category = 'residencial';
-            } else if (button.id === 'filter-com') {
-                category = 'comercial';
-            } else {
-                category = 'all';
-            }
-            
-            filterProjects(category);
-            setActiveButton(button);
-        });
-    });
-
-    // Inicia con el filtro 'Todo' activo al cargar la página (opcional)
-    const allButton = document.getElementById('filter-all');
-    if (allButton) {
-        allButton.click(); // Simula un click en 'Todo' al cargar
-    }
-
-    /*
-    ============================================================
-    5. FUNCIONALIDAD DEL CARRUSEL (SLIDER)
-    ============================================================
-    */
-    const carouselTrack = document.getElementById('carousel-track');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-
-    if (carouselTrack && prevBtn && nextBtn) {
-        const slides = carouselTrack.querySelectorAll('.grid'); // Cada slide es un div.grid
-        const slideCount = slides.length;
-        let currentIndex = 0;
-        let slideWidth = 0;
-
-        // 5.1. Inicialización y ajuste de tamaño
-        function initializeCarousel() {
-            // Calcula el ancho basado en el contenedor padre
-            const container = carouselTrack.parentElement;
-            slideWidth = container.clientWidth;
-            
-            // Asigna el ancho calculado a cada slide
-            slides.forEach(slide => {
-                slide.style.minWidth = `${slideWidth}px`;
+            // 1. Quitar 'active' a todos los botones
+            filterButtonsContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active-filter', 'bg-primary-dark', 'text-white', 'hover:bg-dark-hover');
+                // Añadir clases de inactivo (con el hover oliva)
+                btn.classList.add('border', 'border-gray-medium', 'text-primary-dark', 'hover:bg-accent-olive', 'hover:text-white', 'hover:border-accent-olive');
             });
+
+            // 2. Añadir 'active' solo al botón clickeado
+            filterBtn.classList.add('active-filter', 'bg-primary-dark', 'text-white', 'hover:bg-dark-hover');
+            // Quitar clases de inactivo
+            filterBtn.classList.remove('border', 'border-gray-medium', 'text-primary-dark', 'hover:bg-accent-olive', 'hover:text-white', 'hover:border-accent-olive');
+
+            // 3. Filtrar las tarjetas (Mostrar/Ocultar)
+            const filterValue = filterBtn.dataset.filter;
             
-            // Ajusta el ancho total del track
-            carouselTrack.style.width = `${slideWidth * slideCount}px`;
-            
-            // Muestra el primer slide
-            updateCarousel();
-        }
-
-        // Ejecutar al cargar la página y al redimensionar
-        initializeCarousel();
-        window.addEventListener('resize', initializeCarousel);
-
-
-        // 5.2. Función principal de movimiento
-        function updateCarousel() {
-            // Calcula la posición de desplazamiento
-            const offset = -currentIndex * slideWidth;
-            carouselTrack.style.transform = `translateX(${offset}px)`;
-            
-            // Oculta/Muestra los botones si llegamos a los límites
-            prevBtn.style.display = (currentIndex === 0) ? 'none' : 'block';
-            nextBtn.style.display = (currentIndex === slideCount - 1) ? 'none' : 'block';
-        }
-
-        // 5.3. Navegación
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < slideCount - 1) {
-                currentIndex++;
-                updateCarousel();
-            }
+            portfolioCards.forEach(card => {
+                const category = card.dataset.category;
+                
+                if (filterValue === 'all' || filterValue === category) {
+                    card.classList.remove('hidden'); // Mostrar
+                } else {
+                    card.classList.add('hidden'); // Ocultar
+                }
+            });
         });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-    } // Fin del if(carouselTrack...)
-
-    // NOTA: La lógica de filtros de portafolio (Punto 4) queda deshabilitada
-    // por ahora, ya que estamos usando el carrusel.
+    }
 
     /*
     ============================================================
-    6. FUNCIONALIDAD DEL CARRUSEL DE TESTIMONIOS
+    5. FUNCIONALIDAD DEL CARRUSEL DE TESTIMONIOS (Sin cambios)
     ============================================================
     */
     const testimonialTrack = document.getElementById('testimonial-track');
@@ -222,76 +116,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const testimonialNextBtn = document.getElementById('testimonial-next-btn');
 
     if (testimonialTrack && testimonialPrevBtn && testimonialNextBtn) {
-        const slides = testimonialTrack.querySelectorAll('.grid'); // Cada slide es un div.grid
+        // ... (La lógica del carrusel de testimonios sigue igual) ...
+        const slides = testimonialTrack.querySelectorAll('.grid');
         const slideCount = slides.length;
         let currentIndex = 0;
         let slideWidth = 0;
 
-        // 6.1. Inicialización y ajuste de tamaño
         function initializeTestimonialCarousel() {
-            // Calcula el ancho basado en el contenedor padre (el div 'relative')
             const container = testimonialTrack.parentElement;
             slideWidth = container.clientWidth;
-            
-            // Asigna el ancho calculado a cada slide
             slides.forEach(slide => {
                 slide.style.minWidth = `${slideWidth}px`;
             });
-            
-            // Muestra el primer slide
             updateTestimonialCarousel();
         }
-
-        // Ejecutar al cargar la página y al redimensionar
         initializeTestimonialCarousel();
         window.addEventListener('resize', initializeTestimonialCarousel);
 
-        // 6.2. Función principal de movimiento
         function updateTestimonialCarousel() {
-            // Calcula la posición de desplazamiento
             const offset = -currentIndex * slideWidth;
             testimonialTrack.style.transform = `translateX(${offset}px)`;
-            
-            // Deshabilita/Habilita los botones si llegamos a los límites
             testimonialPrevBtn.disabled = (currentIndex === 0);
             testimonialNextBtn.disabled = (currentIndex === slideCount - 1);
         }
-
-        // 6.3. Navegación
         testimonialNextBtn.addEventListener('click', () => {
             if (currentIndex < slideCount - 1) {
                 currentIndex++;
                 updateTestimonialCarousel();
             }
         });
-
         testimonialPrevBtn.addEventListener('click', () => {
             if (currentIndex > 0) {
                 currentIndex--;
                 updateTestimonialCarousel();
             }
         });
-    } // Fin del if(testimonialTrack...)
+    }
 
     /*
     ============================================================
-    7. FUNCIONALIDAD DEL FORMULARIO DE CONTACTO (SERVERLESS)
+    6. FUNCIONALIDAD DEL FORMULARIO DE CONTACTO (Sin cambios)
     ============================================================
     */
     const contactForm = document.querySelector('#contacto form');
-    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
-    if (contactForm) {
+    if (contactForm && submitButton) {
+        // ... (La lógica del formulario de contacto sigue igual) ...
         contactForm.addEventListener('submit', async (e) => {
-            // Prevenir el envío tradicional del formulario
             e.preventDefault();
-
-            // 1. Mostrar estado de "Enviando..."
             const originalButtonText = submitButton.innerHTML;
             submitButton.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
             submitButton.disabled = true;
-
-            // 2. Recolectar los datos
             const formData = new FormData(contactForm);
             const data = {
                 nombre: formData.get('nombre'),
@@ -299,36 +175,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefono: formData.get('telefono'),
                 mensaje: formData.get('mensaje'),
             };
-
             try {
-                // 3. Enviar datos a nuestra Función Serverless
                 const response = await fetch('/api/send-email', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 });
-
                 if (response.ok) {
-                    // 4. Éxito
-                    contactForm.reset(); // Limpiar el formulario
+                    contactForm.reset();
                     submitButton.innerHTML = '¡Mensaje Enviado!';
                     submitButton.classList.remove('bg-primary-dark', 'hover:bg-dark-hover');
-                    submitButton.classList.add('bg-green-500'); // Color verde de éxito
+                    submitButton.classList.add('bg-green-500');
                 } else {
-                    // 5. Error del servidor
                     throw new Error('Hubo un problema con el envío.');
                 }
-
             } catch (error) {
-                // 6. Error de red o del fetch
                 submitButton.innerHTML = 'Error al Enviar';
                 submitButton.classList.remove('bg-primary-dark', 'hover:bg-dark-hover');
-                submitButton.classList.add('bg-red-500'); // Color rojo de error
+                submitButton.classList.add('bg-red-500');
                 console.error(error);
             } finally {
-                // 7. Después de 3 segundos, restaurar el botón
                 setTimeout(() => {
                     submitButton.innerHTML = originalButtonText;
                     submitButton.disabled = false;
@@ -336,6 +202,107 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitButton.classList.add('bg-primary-dark', 'hover:bg-dark-hover');
                 }, 3000);
             }
+        });
+    }
+
+    /*
+    ============================================================
+    7. FUNCIONALIDAD DE LIGHTBOX DEL PORTAFOLIO (CORREGIDO)
+    ============================================================
+    */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDesc = document.getElementById('lightbox-desc');
+    const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+    
+    // [CORREGIDO] Seleccionamos las tarjetas desde el nuevo '#portfolio-grid'
+    const allPortfolioCards = document.querySelectorAll('#portfolio-grid .portfolio-card'); 
+
+    if (lightbox && allPortfolioCards.length > 0) {
+
+        function openLightbox(card) {
+            const imgSrc = card.querySelector('img').src;
+            const title = card.querySelector('h3').textContent;
+            const description = card.getAttribute('data-description-long');
+            lightboxImg.src = imgSrc; 
+            lightboxTitle.textContent = title;
+            lightboxDesc.textContent = description || "No hay descripción disponible.";
+            lightbox.classList.remove('hidden');
+            setTimeout(() => {
+                lightbox.classList.add('opacity-100');
+                lightboxContent.classList.add('opacity-100', 'scale-100');
+                lightboxContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100');
+            lightboxContent.classList.remove('opacity-100', 'scale-100');
+            lightboxContent.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = "";
+            }, 300);
+        }
+
+        // [MODIFICADO] Asignamos el evento a TODAS las tarjetas.
+        allPortfolioCards.forEach(card => {
+            card.addEventListener('click', () => {
+                openLightbox(card);
+            });
+        });
+
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    /*
+    ============================================================
+    8. FUNCIONALIDAD DE ACORDEÓN (FAQ)
+    ============================================================
+    */
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+            const toggleButton = item.querySelector('.faq-toggle');
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('.faq-icon');
+
+            toggleButton.addEventListener('click', () => {
+                // Comprueba si el acordeón actual está abierto
+                const isOpen = item.classList.contains('active');
+
+                // Opcional: Cierra todos los demás acordeones
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = '0px';
+                        otherItem.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Abre o cierra el acordeón actual
+                if (isOpen) {
+                    // Cierra
+                    item.classList.remove('active');
+                    answer.style.maxHeight = '0px';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    // Abre
+                    item.classList.add('active');
+                    // Establece la altura máxima al contenido real para la animación
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
         });
     }
 
