@@ -7,13 +7,17 @@
     --text-body: #334155;       /* Gris Slate */
     --bg-soft: #F8FAFC;         /* Blanco Humo */
     --white: #ffffff;
+    --footer-bg: #1a1a1a;       /* Fondo oscuro para el footer */
 }
 
 body {
     background-color: var(--bg-soft);
     color: var(--text-body);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0; /* Asegura que no haya márgenes extra */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el footer se vaya al final si hay poco contenido */
 }
 
 /* --- HEADER --- */
@@ -29,13 +33,13 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-sizing: border-box; /* Evita que el padding ensanche el header */
+    box-sizing: border-box;
 }
 
 /* LOGO */
 .brand-logo {
     display: block; 
-    height: 60px; /* Ajustado para que quepa bien */
+    height: 60px;
     width: 200px; 
     position: relative; 
     overflow: hidden; 
@@ -44,7 +48,7 @@ header {
 .brand-logo img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Mejor que cover para logos */
+    object-fit: contain;
 }
 
 /* --- NAVEGACIÓN --- */
@@ -55,7 +59,7 @@ header {
 
 .main-nav a {
     text-decoration: none;
-    color: var(--primary-dark); /* Corregido: antes decía primary-blue */
+    color: var(--primary-dark);
     font-weight: 600;
     font-size: 0.95rem;
     text-transform: uppercase;
@@ -119,6 +123,118 @@ header {
     border-left: 1px solid rgba(0,0,0,0.1);
 }
 
+/* --- FOOTER (NUEVO) --- */
+.site-footer {
+    background-color: var(--footer-bg);
+    color: #ffffff;
+    padding: 50px 20px 30px;
+    margin-top: auto; /* Empuja el footer al final */
+    position: relative;
+    z-index: 10;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.footer-section {
+    flex: 1;
+}
+
+/* Footer: Redes */
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--accent-gold); /* Integra tu color dorado */
+}
+
+/* Footer: Logo Centro */
+.logo-section {
+    text-align: center;
+}
+
+.footer-brand {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/* Footer: Legales Derecha */
+.legal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.legal-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.legal-links a:hover {
+    color: var(--accent-gold); /* Integra tu color dorado */
+    text-decoration: underline;
+}
+
+/* Footer: Datos Sergesac */
+.footer-bottom {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.6;
+}
+
+.footer-bottom strong {
+    color: #aaa;
+    font-weight: 600;
+}
+
+/* --- WHATSAPP FLOTANTE --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.3s;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
 /* --- RESPONSIVE --- */
 .menu-toggle {
     display: none;
@@ -152,4 +268,14 @@ header {
         padding: 60px 20px; 
         min-height: 50vh; 
     }
+
+    /* Ajustes Footer Móvil */
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .social-icons { justify-content: center; }
+    .legal-links { align-items: center; }
 }
