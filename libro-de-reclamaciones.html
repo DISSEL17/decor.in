@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de Reclamaciones | DECOR.IN</title>
+    <link rel="icon" type="image/jpeg" href="./images/Decorinv1.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-[#F8FAFC] text-[#334155] font-sans antialiased min-h-screen flex flex-col">
+
+    <header class="bg-white shadow-sm py-4 w-full sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <h2 class="text-2xl font-bold tracking-[0.2em] uppercase text-[#0F172A]">DECOR.IN</h2> 
+            </a>
+            <a href="index.html" class="text-[#0F172A] hover:text-[#C5A059] font-semibold transition-colors duration-300">
+                <i class="fas fa-arrow-left mr-2"></i> Volver al inicio
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12 px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md rounded-lg border border-gray-100">
+            
+            <div class="flex items-center gap-4 border-b pb-6 mb-8">
+                <i class="fas fa-book-open text-4xl text-[#C5A059]"></i>
+                <div>
+                    <h1 class="text-3xl font-bold text-[#0F172A]">Libro de Reclamaciones</h1>
+                    <p class="text-sm text-gray-500 mt-1">Conforme a lo establecido en el Código de Protección y Defensa del Consumidor.</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-md mb-8 text-sm border border-gray-200">
+                <p><strong>Razón Social:</strong> Servicios Generales J & B Asociados S.A.C.</p>
+                <p><strong>RUC:</strong> 20604346551</p>
+                <p><strong>Dirección:</strong> Lima, Perú.</p>
+            </div>
+
+            <form action="#" method="POST" class="space-y-8">
+                
+                <section>
+                    <h2 class="text-xl font-semibold text-[#0F172A] mb-4 border-l-4 border-[#C5A059] pl-3">1. Identificación del Consumidor</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombres completos *</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Apellidos completos *</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Documento *</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                                <option>DNI</option>
+                                <option>CE</option>
+                                <option>Pasaporte</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Número de Documento *</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono / Celular *</label>
+                            <input type="tel" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico *</label>
+                            <input type="email" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-[#0F172A] mb-4 border-l-4 border-[#C5A059] pl-3">2. Detalle del Reclamo o Queja</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo *</label>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="tipo" value="reclamo" required class="text-[#C5A059] focus:ring-[#C5A059]"> Reclamo
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="tipo" value="queja" required class="text-[#C5A059] focus:ring-[#C5A059]"> Queja
+                                </label>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">
+                                <strong>Reclamo:</strong> Disconformidad relacionada a los servicios prestados.<br>
+                                <strong>Queja:</strong> Disconformidad no relacionada a los servicios, sino a la atención al público.
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Detalle de lo sucedido *</label>
+                            <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pedido del consumidor *</label>
+                            <textarea rows="2" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]" placeholder="¿Qué solución espera?"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <button type="submit" class="w-full bg-[#0F172A] text-white px-6 py-4 rounded-md font-semibold hover:bg-[#C5A059] transition-colors duration-300 shadow-md text-lg">
+                    Enviar Reclamo
+                </button>
+            </form>
+        </div>
+    </main>
+
+<footer class="bg-[#1a1a1a] text-white pt-12 pb-8 mt-auto relative z-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8 border-b border-gray-700 pb-8 mb-8">
+        
+        <div class="flex gap-6 order-2 md:order-1">
+            <a href="https://instagram.com/tu_cuenta" target="_blank" aria-label="Instagram" class="text-2xl text-white hover:text-accent-olive transition-colors duration-300">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com/tu_cuenta" target="_blank" aria-label="Facebook" class="text-2xl text-white hover:text-accent-olive transition-colors duration-300">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com/@tu_cuenta" target="_blank" aria-label="TikTok" class="text-2xl text-white hover:text-accent-olive transition-colors duration-300">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+
+        <div class="text-center order-1 md:order-2">
+            <h2 class="text-3xl font-bold tracking-[0.2em] uppercase text-white">DECOR.IN</h2> 
+        </div>
+
+        <div class="flex flex-col items-center md:items-end gap-3 text-sm text-gray-400 order-3">
+            <a href="politica-de-privacidad.html" class="hover:text-white hover:underline transition-colors">
+                Política de privacidad
+            </a>
+            <a href="libro-de-reclamaciones.html" class="flex items-center gap-2 hover:text-white hover:underline transition-colors">
+                <i class="fas fa-book-open"></i> Libro de reclamaciones
+            </a>
+        </div>
+    </div>
+
+    <div class="text-center text-sm text-gray-500 space-y-2">
+        <p>&copy; 2026 Decor.in. Todos los derechos reservados.</p>
+        <p>
+            Una marca comercial operada por <strong class="text-gray-400">Servicios Generales J & B Asociados S.A.C.</strong><br>
+            RUC: 20604346551 | Lima, Perú.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
