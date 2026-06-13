@@ -155,32 +155,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*
     ============================================================
-    6. FUNCIONALIDAD DEL FORMULARIO DE CONTACTO (Sin cambios)
+    6. FUNCIONALIDAD DEL FORMULARIO DE CONTACTO (ACTUALIZADO FORMSUBMIT)
     ============================================================
     */
     const contactForm = document.querySelector('#contacto form');
     const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
     if (contactForm && submitButton) {
-        // ... (La lógica del formulario de contacto sigue igual) ...
         contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Evita que la página se recargue
+            
             const originalButtonText = submitButton.innerHTML;
             submitButton.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
             submitButton.disabled = true;
+            
+            // Recolectamos todos los datos de los inputs automáticamente
             const formData = new FormData(contactForm);
-            const data = {
-                nombre: formData.get('nombre'),
-                email: formData.get('email'),
-                telefono: formData.get('telefono'),
-                mensaje: formData.get('mensaje'),
-            };
+            
+            // Campos de configuración ocultos de FormSubmit (opcionales pero útiles)
+            formData.append('_subject', 'NUEVA COTIZACIÓN - DECOR.IN');
+            formData.append('_template', 'table');
+            formData.append('_captcha', 'false'); // Desactiva el captcha para que el AJAX funcione limpio
+
             try {
-                const response = await fetch('/api/send-email', {
+                // Hacemos la petición a la URL especial /ajax/ de FormSubmit
+                const response = await fetch('https://formsubmit.co/ajax/decorin.contacto@gmail.com', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
+                    headers: { 
+                        'Accept': 'application/json' 
+                    },
+                    body: formData
                 });
+                
                 if (response.ok) {
                     contactForm.reset();
                     submitButton.innerHTML = '¡Mensaje Enviado!';
@@ -195,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.classList.add('bg-red-500');
                 console.error(error);
             } finally {
+                // Restauramos el botón después de 3 segundos
                 setTimeout(() => {
                     submitButton.innerHTML = originalButtonText;
                     submitButton.disabled = false;
@@ -305,5 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    
 
 }); // Fin del DOMContentLoaded
