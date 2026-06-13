@@ -38,38 +38,41 @@
                 <p><strong>Dirección:</strong> Lima, Perú.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-8">
+<form action="https://formsubmit.co/decorin.contacto@gmail.com" method="POST" class="space-y-8">
+                
+                <input type="hidden" name="_subject" value="NUEVO RECLAMO/QUEJA - Libro de Reclamaciones">
+                <input type="hidden" name="_template" value="table">
                 
                 <section>
                     <h2 class="text-xl font-semibold text-[#0F172A] mb-4 border-l-4 border-[#C5A059] pl-3">1. Identificación del Consumidor</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nombres completos *</label>
-                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                            <input type="text" name="Nombres" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Apellidos completos *</label>
-                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                            <input type="text" name="Apellidos" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Documento *</label>
-                            <select class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
-                                <option>DNI</option>
-                                <option>CE</option>
-                                <option>Pasaporte</option>
+                            <select name="Tipo_Documento" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                                <option value="DNI">DNI</option>
+                                <option value="CE">CE</option>
+                                <option value="Pasaporte">Pasaporte</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Número de Documento *</label>
-                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                            <input type="text" name="Numero_Documento" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono / Celular *</label>
-                            <input type="tel" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                            <input type="tel" name="Telefono" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico *</label>
-                            <input type="email" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
+                            <input type="email" name="Email" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]">
                         </div>
                     </div>
                 </section>
@@ -81,10 +84,10 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tipo *</label>
                             <div class="flex gap-6">
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="tipo" value="reclamo" required class="text-[#C5A059] focus:ring-[#C5A059]"> Reclamo
+                                    <input type="radio" name="Tipo_Reclamo" value="Reclamo" required class="text-[#C5A059] focus:ring-[#C5A059]"> Reclamo
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="tipo" value="queja" required class="text-[#C5A059] focus:ring-[#C5A059]"> Queja
+                                    <input type="radio" name="Tipo_Reclamo" value="Queja" required class="text-[#C5A059] focus:ring-[#C5A059]"> Queja
                                 </label>
                             </div>
                             <p class="text-xs text-gray-500 mt-2">
@@ -94,11 +97,11 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Detalle de lo sucedido *</label>
-                            <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]"></textarea>
+                            <textarea name="Detalle_Suceso" rows="4" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]"></textarea>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Pedido del consumidor *</label>
-                            <textarea rows="2" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]" placeholder="¿Qué solución espera?"></textarea>
+                            <textarea name="Pedido_Solucion" rows="2" required class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#C5A059] focus:border-[#C5A059]" placeholder="¿Qué solución espera?"></textarea>
                         </div>
                     </div>
                 </section>
