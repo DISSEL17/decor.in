@@ -34,8 +34,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/style.css">
-    
-    <script src="./js/main.js" defer></script>
+    <script 
+    src="./js/main.js" defer>
+    </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 </head>
 
 <body class="font-sans bg-primary-light text-primary-dark">
@@ -65,8 +68,13 @@
         </div>
     </header>
 
-    <section id="inicio" class="py-20 md:py-32 text-center hero-parallax">
-        <div class="relative z-10 max-w-4xl mx-auto px-4">
+<section id="inicio" class="relative text-center overflow-hidden h-[80vh] flex items-center justify-center">
+        
+        <div id="panorama-hero" class="absolute inset-0 z-0 w-full h-full cursor-grab active:cursor-grabbing"></div>
+        
+        <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
+        
+        <div class="relative z-20 max-w-4xl mx-auto px-4 pointer-events-none">
             <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
                 Transformamos espacios <br> en experiencias
             </h1>
@@ -583,6 +591,21 @@
             &times;
         </button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            pannellum.viewer('panorama-hero', {
+                "type": "equirectangular",
+                /* Aquí pondrás el enlace a tu propia imagen 360° cuando la tengas */
+                "panorama": "https://pannellum.org/images/bma-0.jpg",
+                "autoLoad": true,
+                "showControls": false, /* Oculta los botones feos para que parezca un fondo web */
+                "autoRotate": -2, /* Velocidad a la que gira solo. Negativo = gira a la derecha */
+                "mouseZoom": false, /* Desactiva el scroll del mouse para no estorbar al bajar por la página */
+                "compass": false
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -14,22 +14,6 @@ html { scroll-behavior: smooth; }
 
 a, button { transition: all 0.3s ease-in-out; }
 
-/* === HERO PARALLAX === */
-.hero-parallax {
-    background-image: url('https://i.pinimg.com/736x/16/45/9c/16459c9e41f706cbfa23064e0f614c44.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed; 
-    position: relative; 
-}
-.hero-parallax::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4); 
-    z-index: 1; 
-}
-
 /* === LOGO === */
 .brand-logo {
     display: block;
