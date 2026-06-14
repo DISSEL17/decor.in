@@ -1,0 +1,69 @@
+/* --- CONFIGURACIÓN BASE --- */
+html { scroll-behavior: smooth; }
+
+/* --- ANIMACIONES DE APARICIÓN --- */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+a, button { transition: all 0.3s ease-in-out; }
+
+/* === HERO PARALLAX === */
+.hero-parallax {
+    background-image: url('https://i.pinimg.com/736x/16/45/9c/16459c9e41f706cbfa23064e0f614c44.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; 
+    position: relative; 
+}
+.hero-parallax::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1; 
+}
+
+/* === LOGO === */
+.brand-logo {
+    display: block;
+    height: 85px;       
+    width: 250px;       
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;     
+}
+.brand-logo img {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 100%; height: auto;
+    object-fit: contain; 
+}
+@media (max-width: 900px) {
+    .brand-logo { width: 160px; } 
+}
+
+/* === FILTROS PORTAFOLIO === */
+.filter-btn {
+    border-radius: 9999px; 
+    font-weight: 600;
+    font-size: 0.875rem; 
+    letter-spacing: 0.025em; 
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #363231; 
+    border: 1px solid #d1d5db; 
+}
+.filter-btn:hover { border-color: #C5A059; color: #C5A059; }
+.filter-btn.active-filter {
+    background-color: #363231; 
+    color: white;
+    border-color: #363231;
+}
